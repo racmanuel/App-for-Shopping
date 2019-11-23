@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Shopping List</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="node_modules\materialize-css\dist\css\materialize.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+
+<body>
+    <div class="navbar-fixed">
+        <nav class="#ef6c00 orange darken-3">
+            <div class="nav-wrapper">
+                <a href="#!" class="brand-logo center">
+                    <i class="material-icons">shopping_cart</i>
+                    Shopping List
+                </a>
+            </div>
+        </nav>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col s6">
+                <form action="#" id="form">
+                    <div class="input-field">
+                        <textarea id="product" class="materialize-textarea"></textarea>
+                        <label for="product">
+                            <i class="material-icons">local_mall
+                            </i>
+                            Products to add</label>
+                    </div>
+                    <button type="submit"
+                        class="btn-floating btn-large waves-effect waves-light #64dd17 light-green accent-4"><i
+                            class="material-icons">add</i></button>
+                </form>
+            </div>
+            <div class="col s6">
+                <h5><i class="material-icons">subject</i> List of pendings:</h5>
+                <div>
+                    <ul id="list-products" class="collection">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="node_modules\materialize-css\dist\js\materialize.min.js"></script>
+</body>
+
+</html>
