@@ -5,6 +5,9 @@ eventListeners();
 //Like a Main in Java
 function eventListeners() {
     document.querySelector('#form').addEventListener('submit', addProduct);
+    listofShop.addEventListener('click', deleteProduct);
+    //Load Contend from Local Storage
+    document.addEventListener('DOMContentLoaded', localStorageReady)
 }
 
 function addProduct(e) {
@@ -12,21 +15,65 @@ function addProduct(e) {
     //Get a value of the input
     const product = document.getElementById('product').value;
     //Delete
-    const buttonDelete= document.createElement('a');
-    buttonDelete.classList = 'deleteProduct waves-effect waves-light btn-small #e53935 red darken-1';
-    buttonDelete.innerHTML =`<i class="tiny material-icons deleteIcon">clear</i>`;
+    const buttonDelete = document.createElement('a');
+    buttonDelete.classList = 'deleteProduct';
+    buttonDelete.innerText = 'X';
 
     //Delete list items
-    listofShop.addEventListener('click',deleteProduct);
+    listofShop.addEventListener('click', deleteProduct);
     //Create a list and add to the list
     const list = document.createElement('li');
-    list.classList='collection-item';
-    list.innerText= product;
+    list.classList = 'collection-item';
+    list.innerText = product;
     list.appendChild(buttonDelete);
     listofShop.appendChild(list);
+
+    //Add to LocalStorage
+    addProductLocalStorage(product);
 }
 
 function deleteProduct(e) {
     e.preventDefault();
-    console.log('diste click')
+    if (e.target.className === 'deleteProduct') {
+        console.log(e.target.parentElement.remove());
+        alert('Deleted');
+    }
+}
+
+function addProductLocalStorage(product) {
+    let products;
+    products = getProductsLocalStorage();
+    //Add a new product
+    products.push(product);
+    //Covert a string to a array for local storage
+    localStorage.setItem('products', JSON.stringify(products));
+}
+
+function getProductsLocalStorage() {
+    let products;
+    if (localStorage.getItem('products') === null) {
+        products = [];
+    } else {
+        products = JSON.parse(localStorage.getItem('products'));
+    }
+    return products;
+}
+
+function localStorageReady() {
+    let products
+    products = getProductsLocalStorage();
+    products.forEach(function (product) {
+        const buttonDelete = document.createElement('a');
+        buttonDelete.classList = 'deleteProduct';
+        buttonDelete.innerText = 'X';
+
+        //Delete list items
+        listofShop.addEventListener('click', deleteProduct);
+        //Create a list and add to the list
+        const list = document.createElement('li');
+        list.classList = 'collection-item';
+        list.innerText = product;
+        list.appendChild(buttonDelete);
+        listofShop.appendChild(list);
+    }); 
 }
