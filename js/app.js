@@ -36,7 +36,8 @@ function deleteProduct(e) {
     e.preventDefault();
     if (e.target.className === 'deleteProduct') {
         console.log(e.target.parentElement.remove());
-        alert('Deleted');
+        deleteLocalStorage(e.target.parentElement.innerText);
+        
     }
 }
 
@@ -76,4 +77,18 @@ function localStorageReady() {
         list.appendChild(buttonDelete);
         listofShop.appendChild(list);
     }); 
+}
+function deleteLocalStorage(product) {
+    let products, productDelete;
+
+    productDelete = product.substring(0,product.length-1);
+
+    products = getProductsLocalStorage();
+    
+    products.forEach(function (product,index) {
+        if (productDelete === product) {
+            products.splice(index,1);
+        }
+    });
+    localStorage.setItem('products', JSON.stringify(products));
 }
